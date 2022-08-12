@@ -42,8 +42,12 @@ def determine_update_actions(bucket, s3_keys: List[str]) -> Iterator[FileUpdateA
         yield FileUpdateAction(bucket, key)
 
 
+def bucket_names() -> Iterator[str]:
+    return (b['Name'] for b in s3.list_buckets()['Buckets'])
+
+
 def update(bucket_name_pattern: str):
-    buckets = [b['Name'] for b in s3.list_buckets()['Buckets']]
+    
     filtered_buckets = filter_buckets(buckets, bucket_name_pattern)
     for bucket in filtered_buckets:
         print(bucket)
@@ -52,7 +56,9 @@ def update(bucket_name_pattern: str):
             update_txt_file()
         
 
-
+def update2():
+    buckets = bucket_names()
+    filtered
 
 
 
